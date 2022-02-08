@@ -1,0 +1,3 @@
+rootProject.name = "libavifdemo"
+include ':app'
+include ':libavif'

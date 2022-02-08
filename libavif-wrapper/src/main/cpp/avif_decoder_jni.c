@@ -36,7 +36,7 @@ void throwIae(JNIEnv *env, const char *message, int errorCode) {
 
 
 static jlong
-Java_libavif_AvifDecoder_createDecoderByteArray0(JNIEnv *env, jclass clazz,
+Java_com_xyczero_libavif_AvifDecoder_createDecoderByteArray0(JNIEnv *env, jclass clazz,
                                                  jbyteArray byteArray, jint off,
                                                  jint len) {
 
@@ -74,7 +74,7 @@ Java_libavif_AvifDecoder_createDecoderByteArray0(JNIEnv *env, jclass clazz,
 }
 
 static jlong
-Java_libavif_AvifDecoder_createDecoderByteBuffer0(JNIEnv *env, jclass clazz,
+Java_com_xyczero_libavif_AvifDecoder_createDecoderByteBuffer0(JNIEnv *env, jclass clazz,
                                                   jobject byteBuffer, jint off,
                                                   jint len) {
     MyAvifDecoder *myDecoder = malloc(sizeof(MyAvifDecoder));
@@ -108,38 +108,38 @@ Java_libavif_AvifDecoder_createDecoderByteBuffer0(JNIEnv *env, jclass clazz,
 }
 
 static jint
-Java_libavif_AvifDecoder_getImageCount0(JNIEnv *env, jclass clazz, jlong n_decoder) {
+Java_com_xyczero_libavif_AvifDecoder_getImageCount0(JNIEnv *env, jclass clazz, jlong n_decoder) {
     MyAvifDecoder *myDecoder = jlong_to_ptr(n_decoder);
     return myDecoder->decoder->imageCount;
 }
 
 static jint
-Java_libavif_AvifDecoder_getImageIndex0(JNIEnv *env, jclass clazz, jlong n_decoder) {
+Java_com_xyczero_libavif_AvifDecoder_getImageIndex0(JNIEnv *env, jclass clazz, jlong n_decoder) {
     MyAvifDecoder *myDecoder = jlong_to_ptr(n_decoder);
     return myDecoder->decoder->imageIndex;
 }
 
 static jint
-Java_libavif_AvifDecoder_getImageLimit0(JNIEnv *env, jclass clazz, jlong n_decoder) {
+Java_com_xyczero_libavif_AvifDecoder_getImageLimit0(JNIEnv *env, jclass clazz, jlong n_decoder) {
     MyAvifDecoder *myDecoder = jlong_to_ptr(n_decoder);
     return myDecoder->decoder->imageCountLimit;
 }
 
 static jboolean
-Java_libavif_AvifDecoder_nextImage0(JNIEnv *env, jclass clazz, jlong n_decoder) {
+Java_com_xyczero_libavif_AvifDecoder_nextImage0(JNIEnv *env, jclass clazz, jlong n_decoder) {
     MyAvifDecoder *myDecoder = jlong_to_ptr(n_decoder);
     return avifDecoderNextImage(myDecoder->decoder) == AVIF_RESULT_OK;
 }
 
 static jlong
-Java_libavif_AvifDecoder_getImage0(JNIEnv *env, jclass clazz, jlong n_decoder) {
+Java_com_xyczero_libavif_AvifDecoder_getImage0(JNIEnv *env, jclass clazz, jlong n_decoder) {
     MyAvifDecoder *myDecoder = jlong_to_ptr(n_decoder);
     return ptr_to_jlong(myDecoder->decoder->image);
 }
 
 
 static jint
-Java_libavif_AvifDecoder_getFrame0(JNIEnv *env, jclass clazz, jlong n_decoder,
+Java_com_xyczero_libavif_AvifDecoder_getFrame0(JNIEnv *env, jclass clazz, jlong n_decoder,
                                    jobject bitmap) {
     MyAvifDecoder *myDecoder = jlong_to_ptr(n_decoder);
 
@@ -180,7 +180,7 @@ Java_libavif_AvifDecoder_getFrame0(JNIEnv *env, jclass clazz, jlong n_decoder,
 }
 
 static void
-Java_libavif_AvifDecoder_reset0(JNIEnv *env, jclass clazz, jlong n_decoder) {
+Java_com_xyczero_libavif_AvifDecoder_reset0(JNIEnv *env, jclass clazz, jlong n_decoder) {
     MyAvifDecoder *myDecoder = jlong_to_ptr(n_decoder);
     avifResult result = avifDecoderReset(myDecoder->decoder);
     if (result != AVIF_RESULT_OK) {
@@ -190,7 +190,7 @@ Java_libavif_AvifDecoder_reset0(JNIEnv *env, jclass clazz, jlong n_decoder) {
 
 
 static void
-Java_libavif_AvifDecoder_destroy0(JNIEnv *env, jclass clazz, jlong n_decoder) {
+Java_com_xyczero_libavif_AvifDecoder_destroy0(JNIEnv *env, jclass clazz, jlong n_decoder) {
     MyAvifDecoder *myDecoder = jlong_to_ptr(n_decoder);
 
     //free byte array
@@ -211,32 +211,32 @@ Java_libavif_AvifDecoder_destroy0(JNIEnv *env, jclass clazz, jlong n_decoder) {
 
 
 static const JNINativeMethod methods[] = {
-        {"createDecoderByteArray0",  "([BII)J",                       (void *) Java_libavif_AvifDecoder_createDecoderByteArray0},
+        {"createDecoderByteArray0",  "([BII)J",                       (void *) Java_com_xyczero_libavif_AvifDecoder_createDecoderByteArray0},
 
-        {"createDecoderByteBuffer0", "(Ljava/nio/ByteBuffer;II)J",    (void *) Java_libavif_AvifDecoder_createDecoderByteBuffer0},
+        {"createDecoderByteBuffer0", "(Ljava/nio/ByteBuffer;II)J",    (void *) Java_com_xyczero_libavif_AvifDecoder_createDecoderByteBuffer0},
 
-        {"nextImage0",               "(J)Z",                          (void *) Java_libavif_AvifDecoder_nextImage0},
+        {"nextImage0",               "(J)Z",                          (void *) Java_com_xyczero_libavif_AvifDecoder_nextImage0},
 
-        {"getImageCount0",           "(J)I",                          (void *) Java_libavif_AvifDecoder_getImageCount0},
+        {"getImageCount0",           "(J)I",                          (void *) Java_com_xyczero_libavif_AvifDecoder_getImageCount0},
 
-        {"getImageIndex0",           "(J)I",                          (void *) Java_libavif_AvifDecoder_getImageIndex0},
+        {"getImageIndex0",           "(J)I",                          (void *) Java_com_xyczero_libavif_AvifDecoder_getImageIndex0},
 
-        {"getImageLimit0",           "(J)I",                          (void *) Java_libavif_AvifDecoder_getImageLimit0},
+        {"getImageLimit0",           "(J)I",                          (void *) Java_com_xyczero_libavif_AvifDecoder_getImageLimit0},
 
-        {"getImage0",                "(J)J",                          (void *) Java_libavif_AvifDecoder_getImage0},
+        {"getImage0",                "(J)J",                          (void *) Java_com_xyczero_libavif_AvifDecoder_getImage0},
 
-        {"getFrame0",                "(JLandroid/graphics/Bitmap;)I", (void *) Java_libavif_AvifDecoder_getFrame0},
+        {"getFrame0",                "(JLandroid/graphics/Bitmap;)I", (void *) Java_com_xyczero_libavif_AvifDecoder_getFrame0},
 
-        {"reset0",                   "(J)V",                          (void *) Java_libavif_AvifDecoder_reset0},
+        {"reset0",                   "(J)V",                          (void *) Java_com_xyczero_libavif_AvifDecoder_reset0},
 
-        {"destroy0",                 "(J)V",                          (void *) Java_libavif_AvifDecoder_destroy0},
+        {"destroy0",                 "(J)V",                          (void *) Java_com_xyczero_libavif_AvifDecoder_destroy0},
 
 };
 
 #define NELEM(x) ((int) (sizeof(x) / sizeof((x)[0])))
 
 jboolean registerDecoderNativeMethods(JNIEnv *env) {
-    jclass clazz = (*env)->FindClass(env, "libavif/AvifDecoder");
+    jclass clazz = (*env)->FindClass(env, "com/xyczero/libavif/AvifDecoder");
     if (clazz == NULL) {
         return JNI_FALSE;
     }

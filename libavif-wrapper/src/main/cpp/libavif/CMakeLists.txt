@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.5)
 
 # Specify search path for CMake modules to be loaded by include()
 # and find_package()
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
+#list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
 
 project(libavif LANGUAGES C VERSION 0.9.3)
 
@@ -25,7 +25,7 @@ set(LIBRARY_VERSION_PATCH 0)
 set(LIBRARY_VERSION "${LIBRARY_VERSION_MAJOR}.${LIBRARY_VERSION_MINOR}.${LIBRARY_VERSION_PATCH}")
 set(LIBRARY_SOVERSION ${LIBRARY_VERSION_MAJOR})
 
-option(BUILD_SHARED_LIBS "Build shared avif library" ON)
+option(BUILD_SHARED_LIBS "Build shared avif library" OFF)
 
 option(AVIF_ENABLE_WERROR "Treat all compiler warnings as errors" ON)
 
@@ -244,6 +244,8 @@ set(AVIF_CODEC_DEFINITIONS)
 set(AVIF_CODEC_INCLUDES)
 set(AVIF_CODEC_LIBRARIES)
 
+set(AVIF_CODEC_DAV1D ON)
+#message(FATAL_ERROR "libavif: ${AVIF_CODEC_DAV1D}is missing, bailing out")
 if(AVIF_CODEC_DAV1D)
     message(STATUS "libavif: Codec enabled: dav1d (decode)")
     set(AVIF_CODEC_DEFINITIONS ${AVIF_CODEC_DEFINITIONS} -DAVIF_CODEC_DAV1D=1)
@@ -267,7 +269,8 @@ if(AVIF_CODEC_DAV1D)
     else()
         # Check to see if dav1d is independently being built by the outer CMake project
         if(NOT TARGET dav1d)
-            find_package(dav1d REQUIRED)
+            include(../dav1d/cmake/FindDav1d.cmake)
+#            find_package(dav1d REQUIRED)
             set(AVIF_CODEC_INCLUDES ${AVIF_CODEC_INCLUDES} ${DAV1D_INCLUDE_DIR})
         endif()
         set(AVIF_CODEC_LIBRARIES ${AVIF_CODEC_LIBRARIES} ${DAV1D_LIBRARY})
@@ -407,7 +410,7 @@ if(NOT AVIF_CODEC_AOM AND NOT AVIF_CODEC_DAV1D AND NOT AVIF_CODEC_LIBGAV1)
     message(WARNING "libavif: No decoding library is enabled.")
 endif()
 
-add_library(avif ${AVIF_SRCS})
+add_library(avif STATIC ${AVIF_SRCS})
 set_target_properties(avif
                       PROPERTIES
                           VERSION ${LIBRARY_VERSION}

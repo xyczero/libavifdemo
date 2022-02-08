@@ -11,7 +11,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/libavif" />
+            <option value="$PROJECT_DIR$/libavif-wrapper" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

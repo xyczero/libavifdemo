@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/libavif" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libavif-wrapper/src/main/cpp/dav1d/dav1d" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/libavif-wrapper/src/main/cpp/libavif" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/libavif/src/main/cpp/libavif" vcs="Git" />
   </component>
